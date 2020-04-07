@@ -17,6 +17,7 @@ def scents_index(request):
     scents = Scent.objects.all()
     return render(request, 'scents/index.html', {'scents': scents})
 
+
 def scents_detail(request, scent_id):
     scent = Scent.objects.get(id=scent_id)
     return render(request, 'scents/detail.html', {'scent': scent})

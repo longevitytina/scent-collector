@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Scent Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ scent.name }}</span>
+    <p>Location: {{ scent.location }}</p>
+    <p>Characteristics: {{ scent.characteristics }}</p>
+    {% if scent.rating > 7%}
+        <p>Rating: Smells incredible - {{ scent.rating }}</p>
+          {% comment %} {% elif scent.rating > 4 and                     scent.rating < 7 %}
+              <p>Rating: Smells pretty good - {{ scent.rating }}</p>  {% endcomment %}
+    {% else %}
+        <p>Rating: Smells gross! - {{ scent.rating }} </p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
