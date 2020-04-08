@@ -10,12 +10,27 @@
     <p>Characteristics: {{ scent.characteristics }}</p>
     {% if scent.rating > 7%}
         <p>Rating: Smells incredible - {{ scent.rating }}</p>
-          {% comment %} {% elif scent.rating > 4 and                     scent.rating < 7 %}
-              <p>Rating: Smells pretty good - {{ scent.rating }}</p>  {% endcomment %}
+    {% elif scent.rating >= 4 and scent.rating <= 7 %}
+        <p>Rating: Smells decent - {{ scent.rating }}</p>
     {% else %}
         <p>Rating: Smells gross! - {{ scent.rating }} </p>
     {% endif %}
   </div>
 </div>
+   <div class="col s6">
+    <table class="striped">
+      <thead>
+        <tr><th>Date</th><th>Emotion Felt</th></tr>
+      </thead>
+      <tbody>
+        {% for wafting in scent.wafting_set.all %}
+          <tr>
+            <td>{{wafting.date}}</td>
+            <td>{{wafting.get_emotion_display}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 {% endblock %}
