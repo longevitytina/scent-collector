@@ -48,6 +48,9 @@ def add_emotion(request, scent_id):
     return redirect('detail', scent_id=scent_id)
 
 
+def assoc_power(request, scent_id, power_id):
+    Scent.objects.get(id=scent_id).powers.add(power_id)
+    return redirect('detail', scent_id=scent_id)
 class PowerList(ListView):
     model = Power
 
