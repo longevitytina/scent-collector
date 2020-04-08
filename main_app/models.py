@@ -17,11 +17,23 @@ EMOTIONS = (
 )
 
 
+class Power(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(max_length=500)
+
+    def __str__(self):
+        return self.name
+
+    # def get_absolute_url(self):
+    #     return reverse("toys_detail", kwargs={"pk": self.id})
+
+
 class Scent(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     characteristics = models.TextField(max_length=100)
     rating = models.IntegerField()
+    powers = models.ManyToManyField(Power)
 
     def __str__(self):
         return self.name
