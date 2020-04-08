@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
 from .models import Scent, Power
-from .forms import WaftingForm
+from .forms import ScentForm, WaftingForm
 
 
 # views-----------
@@ -51,6 +51,29 @@ def add_emotion(request, scent_id):
 def assoc_power(request, scent_id, power_id):
     Scent.objects.get(id=scent_id).powers.add(power_id)
     return redirect('detail', scent_id=scent_id)
+
+
+def new_scent(request):
+  # if a post request is made to this view function
+    if request.method == 'POST':
+        # save the form data to a variable
+        form = ScentForm(request.POST)
+        if form.is_valid():
+            # if the form passes validation, create a new instance
+            # of the cat model through the ModelForm (CatForm)
+            scent = form.save()
+            # redirect the user to the new cat's detail page
+            return redirect('detail', scent.id)
+    else:
+        # if a get request is made to this view function,
+        # create new, empty instance of the CatForm
+        form = ScentForm()
+    # create a context dictionary
+    context = {'form': form}
+    # pass the form (through context) to the cat_form template
+    return render(request, 'scents/scent_form.html', context)
+
+
 class PowerList(ListView):
     model = Power
 
