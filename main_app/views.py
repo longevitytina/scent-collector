@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Scent
 from django.http import HttpResponse
+from .forms import WaftingForm
 
 
 # views-----------
@@ -20,4 +21,5 @@ def scents_index(request):
 
 def scents_detail(request, scent_id):
     scent = Scent.objects.get(id=scent_id)
-    return render(request, 'scents/detail.html', {'scent': scent})
+    wafting_form = WaftingForm()
+    return render(request, 'scents/detail.html', {'scent': scent, 'wafting_form': wafting_form})
