@@ -24,10 +24,16 @@ def scents_index(request):
 
 def scents_detail(request, scent_id):
     scent = Scent.objects.get(id=scent_id)
-    # powers_scent_doesnt_have = Power.object.exclude(
-    #     id_in=scent.powers.all().values_list('id'))
+    powers_scent_doesnt_have = Power.objects.exclude(
+        id_in=scent.powers.all().values_list('id'))
     wafting_form = WaftingForm()
-    return render(request, 'scents/detail.html', {'scent': scent, 'wafting_form': wafting_form})
+
+    context = {
+        'scent': scent,
+        'wafting_form': wafting_form,
+        'powers': powers_scent_doesnt_have
+    }
+    return render(request, 'scents/detail.html', context)
 
 
 def add_emotion(request, scent_id):
