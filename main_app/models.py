@@ -24,8 +24,8 @@ class Power(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return reverse("toys_detail", kwargs={"pk": self.id})
+    def get_absolute_url(self):
+        return reverse("toys_detail", kwargs={"pk": self.id})
 
 
 class Scent(models.Model):
@@ -59,5 +59,5 @@ class Wafting(models.Model):
     def __str__(self):
         return f"{self.get_emotion_display()} on the {self.date}"
 
-    # class Meta:
-    #     ordering = ['-date']
+    class Meta:
+        ordering = ['-date']
