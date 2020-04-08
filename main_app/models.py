@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+from datetime import date
 
 # Create your models here.
 # TIMES = (
@@ -23,6 +25,9 @@ class Scent(models.Model):
 
     def __str__(self):
         return self.name
+
+    def smelt_for_today(self):
+        return self.wafting_set.filter(date=date.today()).count() >= len(EMOTIONS)
 
 
 class Wafting(models.Model):

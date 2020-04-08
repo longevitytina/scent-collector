@@ -22,7 +22,13 @@
     {% csrf_token %}
     {{ wafting_form.as_p }}
     <input type="submit" class="btn" value="Add Emotion">
-  </form>
+    </form>
+    <br>
+    {% if scent.smelt_for_today %}
+      <div class="card-panel teal-text center-align">{{scent.name}} has been smelt for today</div>
+    {% else %}
+      <div class="card-panel red-text center-align">{{scent.name}} might need smelling</div>
+    {% endif %}
     <table class="striped">
       <thead>
         <tr><th>Date</th><th>Emotion Felt</th></tr>
