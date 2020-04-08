@@ -31,8 +31,8 @@
           </ul>
           <ul class="right">
             <li><a href="/about">About</a></li>
-            <li><a href="{% url 'powers_create' %}">Add a Power</a></li>
-            <li><a href="{% url 'powers_index' %}">View All Power</a></li>
+            {% comment %} <li><a href="{% url 'powers_create' %}">Add a Power</a></li> {% endcomment %}
+            <li><a href="{% url 'power_list' %}">View All Powers</a></li>
             {% comment %} <li><a href="{% url 'new_scent' %}">Add a Scent</a></li> {% endcomment %}
             <li><a href="{% url 'index' %}">View All My Scents</a></li>
           </ul>
