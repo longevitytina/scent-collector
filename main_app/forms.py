@@ -1,8 +1,15 @@
-from django.forms import ModelForm
-from .models import Wafting
+from django import forms
+from .models import Scent, Wafting
 
 
-class WaftingForm(ModelForm):
+class ScentForm(forms.ModelForm):
+
+    class Meta:
+        model = Scent
+        fields = ("name", "location", "characteristics", "rating")
+
+
+class WaftingForm(forms.ModelForm):
     class Meta:
         model = Wafting
         fields = ['date', 'emotion']
