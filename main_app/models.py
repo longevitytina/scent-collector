@@ -1,16 +1,16 @@
 from django.db import models
 
 # Create your models here.
-TIMES = (
-    ('M', 'Morning'),
-    ('A', 'Afternoon'),
-    ('E', 'Evening')
-)
+# TIMES = (
+#     ('M', 'Morning'),
+#     ('A', 'Afternoon'),
+#     ('E', 'Evening')
+# )
 
 EMOTIONS = (
     ('H', 'Happy'),
     ('S', 'Sad'),
-    ('H', 'Humorous'),
+    ('L', 'Laughter'),
     ('A', 'Angry')
 )
 
@@ -26,12 +26,12 @@ class Scent(models.Model):
 
 
 class Wafting(models.Model):
-    date = models.DateField()
-    time = models.CharField(
-        max_length=1,
-        choices=TIMES,
-        default=TIMES[0][0]
-    )
+    date = models.DateField('Smelling Date')
+    # time = models.CharField(
+    #     max_length=1,
+    #     choices=TIMES,
+    #     default=TIMES[0][0]
+    # )
     emotion = models.CharField(
         max_length=1,
         choices=EMOTIONS,
@@ -40,4 +40,7 @@ class Wafting(models.Model):
     scent = models.ForeignKey(Scent, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"This smell made you feel {self.get_emotion_display()} in the {self.get_time_display} on {self.date}"
+        return f"{self.get_emotion_display()} on the {self.date}"
+
+    # class Meta:
+    #     ordering = ['-date']
