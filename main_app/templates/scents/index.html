@@ -12,11 +12,11 @@
         <p>Characteristics: {{ scent.characteristics }}</p>
           {% if scent.rating > 7%}
               <p>Rating: Smells incredible - {{ scent.rating }}</p>
-          {% comment %} {% elif scent.rating > 4 and                     scent.rating < 7 %}
-              <p>Rating: Smells pretty good - {{ scent.rating }}</p>  {% endcomment %}
+          {% elif scent.rating >= 4 and scent.rating <= 7 %}
+              <p>Rating: Smells pretty good - {{ scent.rating }}</p>
           {% else %}
               <p>Rating: Smells gross! - {{ scent.rating }} </p>
-        {% endif %}
+          {% endif %}
       </div>
     </a>
   </div>
