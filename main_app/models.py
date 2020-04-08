@@ -25,7 +25,7 @@ class Power(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("toys_detail", kwargs={"pk": self.id})
+        return reverse("power_detail", kwargs={"pk": self.id})
 
 
 class Scent(models.Model):
