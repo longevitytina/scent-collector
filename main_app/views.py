@@ -74,12 +74,21 @@ def new_scent(request):
     return render(request, 'scents/scent_form.html', context)
 
 
+# def scents_update
+# def scents_delete
+
+
 class PowerList(ListView):
     model = Power
 
 
 class PowerDetail(DetailView):
     model = Power
+
+
+class PowerCreate(CreateView):
+    model = Power
+    fields = '__all__'
 
 
 class PowerUpdate(UpdateView):
