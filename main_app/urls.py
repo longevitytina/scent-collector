@@ -19,5 +19,6 @@ urlpatterns = [
          views.PowerUpdate.as_view(), name='powers_update'),
     path('powers/<int:pk>/delete/',
          views.PowerDelete.as_view(), name='powers_delete'),
+    path('accounts/signup', views.signup, name='signup'),
 
 ]
