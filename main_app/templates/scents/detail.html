@@ -16,6 +16,13 @@
         <p>Rating: Smells gross! - {{ scent.rating }} </p>
     {% endif %}
   </div>
+
+  <div class="card-action">
+    <a>
+    <a>
+  </div>
+
+
 </div>
    <div class="col s6">
    <form action="{% url 'add_emotion' scent.id %}" method="post">
@@ -82,7 +89,7 @@
         </div>
       {% endfor %}
     {% else %}
-      <h5>{{scent.name}} Already Has All Toys Available</h5>
+      <h5>{{scent.name}} Already Has All Powers Available</h5>
     {% endif %}
   </div>
 
