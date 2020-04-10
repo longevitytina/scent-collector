@@ -31,10 +31,15 @@
           </ul>
           <ul class="right">
             <li><a href="/about">About</a></li>
-            <li><a href="{% url 'powers_create' %}">Add a Power</a></li>
-            <li><a href="{% url 'power_list' %}">View All Powers</a></li>
-            {% comment %} <li><a href="{% url 'new_scent' %}">Add a Scent</a></li> {% endcomment %}
-            <li><a href="{% url 'index' %}">View All My Scents</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'powers_create' %}">Add a Power</a></li>
+              <li><a href="{% url 'power_list' %}">View All Powers</a></li>
+              {% comment %} <li><a href="{% url 'new_scent' %}">Add a Scent</a></li> {% endcomment %}
+              <li><a href="{% url 'index' %}">View All My Scents</a></li>
+              <li><a href="{% url 'logout' %}">Log Out</a></li>
+            {% else %}
+              <li><a href="{% url 'login' %}">Log In</a></li>
+            {% endif %}
           </ul>
         </div>
       </nav>
