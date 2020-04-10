@@ -6,7 +6,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('scents/', views.scents_index, name='index'),
     path('scents/<int:scent_id>/', views.scents_detail, name='detail'),
-    #     path('scents/<int:scent_id>/', views.scents_detail, name='new_scent'),
+    path('scents/new/', views.new_scent, name='new_scent'),
     path('scents/<int:scent_id>/add_emotion',
          views.add_emotion, name='add_emotion'),
     path('scents/<int:scent_id>/assoc_power/<int:power_id>/',
