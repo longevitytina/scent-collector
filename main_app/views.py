@@ -3,6 +3,11 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from .models import Scent, Power
 from .forms import ScentForm, WaftingForm
 
@@ -17,11 +22,13 @@ def about(request):
     return render(request, 'about.html')
 
 
+@login_required
 def scents_index(request):
-    scents = Scent.objects.all()
+    scents = Scent.objects.filter(user=request.user)
     return render(request, 'scents/index.html', {'scents': scents})
 
 
+@login_required
 def scents_detail(request, scent_id):
     scent = Scent.objects.get(id=scent_id)
     powers_scent_doesnt_have = Power.objects.exclude(
@@ -48,11 +55,13 @@ def add_emotion(request, scent_id):
     return redirect('detail', scent_id=scent_id)
 
 
+@login_required
 def assoc_power(request, scent_id, power_id):
     Scent.objects.get(id=scent_id).powers.add(power_id)
     return redirect('detail', scent_id=scent_id)
 
 
+@login_required
 def new_scent(request):
   # if a post request is made to this view function
     if request.method == 'POST':
@@ -61,7 +70,9 @@ def new_scent(request):
         if form.is_valid():
             # if the form passes validation, create a new instance
             # of the cat model through the ModelForm (CatForm)
-            scent = form.save()
+            scent = form.save(commit=False)
+            scent.user = request.user
+            scent.save()
             # redirect the user to the new cat's detail page
             return redirect('detail', scent.id)
     else:
@@ -74,7 +85,9 @@ def new_scent(request):
     return render(request, 'scents/scent_form.html', context)
 
 
+# @login_required
 # def scents_update
+# @login_required
 # def scents_delete
 
 def signup(request):
@@ -91,24 +104,25 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-class PowerList(ListView):
+
+class PowerList(LoginRequiredMixin, ListView):
     model = Power
 
 
-class PowerDetail(DetailView):
+class PowerDetail(LoginRequiredMixin, DetailView):
     model = Power
 
 
-class PowerCreate(CreateView):
+class PowerCreate(LoginRequiredMixin, CreateView):
     model = Power
     fields = '__all__'
 
 
-class PowerUpdate(UpdateView):
+class PowerUpdate(LoginRequiredMixin, UpdateView):
     model = Power
     fields = ['name', 'description']
 
 
-class PowerDelete(DeleteView):
+class PowerDelete(LoginRequiredMixin, DeleteView):
     model = Power
     success_url = '/powers/'
