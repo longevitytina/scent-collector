@@ -11,6 +11,7 @@ urlpatterns = [
          views.add_emotion, name='add_emotion'),
     path('scents/<int:scent_id>/assoc_power/<int:power_id>/',
          views.assoc_power, name='assoc_power'),
+    #     CRUD routes for toys
     path('powers/', views.PowerList.as_view(), name='power_list'),
     path('powers/<int:pk>/', views.PowerDetail.as_view(), name='power_detail'),
     path('powers/create/', views.PowerCreate.as_view(), name='powers_create'),
